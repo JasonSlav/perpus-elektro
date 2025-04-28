@@ -11,7 +11,7 @@
         <h1>Perpustakaan Jurusan</h1>
         <nav>
             <a href="{{ route('literatures.index') }}">Home</a>
-            <a href="{{ route('literatures.create') }}">Tambah Literatur</a>
+            <a href="{{ route('library.index') }}">Kelola Literatur</a>
         </nav>
     </header>
 

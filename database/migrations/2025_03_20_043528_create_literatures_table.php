@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('literatures', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->string('author')->nullable();
+            $table->string('author');
             $table->string('publisher')->nullable();
+            $table->string('description')->nullable();
+            $table->json('detail')->nullable();
             $table->integer('year')->nullable();
-            $table->enum('type', ['book', 'journal', 'thesis', 'proceeding', 'ebook', 'video']);
-            $table->string('file_url')->nullable(); // Untuk PDF atau video
-            $table->integer('stock')->nullable(); // Hanya untuk cetak fisik
+            $table->string('file_url')->nullable();
             $table->timestamps();
         });
     }

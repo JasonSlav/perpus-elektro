@@ -4,13 +4,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Literature extends Model
+class Type extends Model
 {
     use HasFactory;
 
-    // Relasi ke Category (Many-to-one)
-    public function category()
+    // Relasi ke Categories (One-to-many)
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Category::class);
     }
 }
