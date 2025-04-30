@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('external_id')->nullable()->unique();
             $table->string('name');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('role');
+            $table->string('role')->default('user'); // cuma satu kali
             $table->boolean('status')->default(1);
             $table->rememberToken();
             $table->timestamps();

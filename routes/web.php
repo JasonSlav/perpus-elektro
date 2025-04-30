@@ -7,7 +7,7 @@ use App\Http\Controllers\LiteratureController;
 Route::resource('literatures', LiteratureController::class);
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
 Route::get('/library', [LibraryController::class, 'index'])->name('library.index');
 Route::post('/library/store-type', [LibraryController::class, 'storeType'])->name('library.storeType');
