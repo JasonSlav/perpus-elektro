@@ -12,9 +12,10 @@ class LiteratureSeeder extends Seeder {
             'author' => 'John Doe',
             'publisher' => 'Tech Publisher',
             'year' => 2024,
-            'type' => 'ebook',
             'file_url' => 'storage/ebooks/laravel11.pdf',
-            'stock' => null
+            'category_id' => 1, // Pastikan ID kategori ini ada di database
+            'description' => 'Panduan lengkap Laravel 11',
+            'detail' => json_encode(['pages' => 200]),
         ]);
     }
 }

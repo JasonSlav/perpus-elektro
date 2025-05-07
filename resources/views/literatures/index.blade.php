@@ -27,6 +27,7 @@
             <td>{{ $literature->author ?? '-' }}</td>
             <td>{{ $literature->publisher ?? '-' }}</td>
             <td>{{ $literature->year ?? '-' }}</td>
+            <td>{{ $literature->description ?? '-' }}</td>
             <td>{{ $literature->detail ?? '-' }}</td> {{-- Dari kolom detail (JSON) --}}
             <td>
                 @if ($literature->file_url)

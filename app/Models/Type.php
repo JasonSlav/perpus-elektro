@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+    protected $fillable = ['name'];
 
     // Relasi ke Categories (One-to-many)
     public function categories()
