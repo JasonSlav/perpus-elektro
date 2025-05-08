@@ -185,7 +185,7 @@
                         <td class="px-6 py-4">{{ $literature->author }}</td>
                         <td class="px-6 py-4">{{ $literature->publisher ?? '-' }}</td>
                         <td class="px-6 py-4">{{ $literature->year }}</td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4">dss
                             <a href="{{ $literature->file_url }}" target="_blank"
                                 class="text-indigo-600 hover:text-indigo-900">Lihat File</a>
                         </td>
