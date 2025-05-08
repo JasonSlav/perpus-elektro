@@ -3,201 +3,264 @@
 @section('title', 'Manajemen Literatur')
 
 @section('content')
-<h2>Manajemen Literatur</h2>
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">Manajemen Literatur</h2>
 
-<!-- Form untuk Type -->
-<h3>Tambah Jenis Literatur</h3>
-<form action="{{ route('library.storeType') }}" method="POST">
-    @csrf
-    <input type="text" name="name" placeholder="Nama Jenis Literatur" required>
-    <button type="submit">Tambah Jenis Literatur</button>
-</form>
+    <!-- Type Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Tambah Jenis Literatur</h3>
+        <form action="{{ route('library.storeType') }}" method="POST" class="space-y-4">
+            @csrf
+            <div class="flex gap-4">
+                <input type="text" name="name" placeholder="Nama Jenis Literatur" required
+                    class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <button type="submit"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150">Tambah
+                    Jenis Literatur</button>
+            </div>
+        </form>
 
-<h3>Daftar Jenis Literatur</h3>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Nama</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($types as $type)
-        <tr>
-            <td>{{ $type->name }}</td>
-            <td>
-                <form action="{{ route('library.updateType', $type->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('PUT')
-                    <input type="text" name="name" value="{{ $type->name }}" required>
-                    <button type="submit">Update</button>
-                </form>
-                <form action="{{ route('library.destroyType', $type->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Hapus</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+        <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4">Daftar Jenis Literatur</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($types as $type)
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $type->name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                            <form action="{{ route('library.updateType', $type->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex gap-2">
+                                    <input type="text" name="name" value="{{ $type->name }}" required
+                                        class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <button type="submit"
+                                        class="px-3 py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition duration-150">Update</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('library.destroyType', $type->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-150">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<hr>
-
-<!-- Form untuk Category -->
-<h3>Tambah Kategori Literatur</h3>
-<form action="{{ route('library.storeCategory') }}" method="POST">
-    @csrf
-    <input type="text" name="name" placeholder="Nama Kategori Literatur" required>
-    <select name="type_id" required>
-        <option value="">Pilih Jenis Literatur</option>
-        @foreach ($types as $type)
-        <option value="{{ $type->id }}">{{ $type->name }}</option>
-        @endforeach
-    </select>
-    <button type="submit">Tambah Kategori Literatur</button>
-</form>
-
-<h3>Daftar Kategori Literatur</h3>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Nama</th>
-            <th>Jenis Literatur</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($categories as $category)
-        <tr>
-            <td>{{ $category->name }}</td>
-            <td>{{ $category->type->name }}</td>
-            <td>
-                <form action="{{ route('library.updateCategory', $category->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('PUT')
-                    <input type="text" name="name" value="{{ $category->name }}" required>
-                    <select name="type_id" required>
-                        @foreach ($types as $type)
-                        <option value="{{ $type->id }}" {{ $type->id == $category->type_id ? 'selected' : '' }}>
-                            {{ $type->name }}
-                        </option>
-                        @endforeach
-                    </select>
-                    <button type="submit">Update</button>
-                </form>
-                <form action="{{ route('library.destroyCategory', $category->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Hapus</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
-<hr>
-
-<!-- Form untuk Literature -->
-<h3>Tambah Literatur</h3>
-<form action="{{ route('library.storeLiterature') }}" method="POST">
-    @csrf
-    <input type="text" name="title" placeholder="Judul Literatur" required>
-    <input type="text" name="author" placeholder="Penulis Literatur" required>
-    <input type="text" name="publisher" placeholder="Penerbit Literatur (tidak wajib)">
-    <input type="number" name="year" placeholder="Tahun Terbit Literatur" required>
-    <input type="url" name="file_url" placeholder="Link Literatur" required>
-    <select name="category_id" required>
-        <option value="">Pilih Kategori Literatur</option>
-        @foreach ($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @endforeach
-    </select><br>
-    <textarea name="description" placeholder="Deskripsi Literatur (tidak wajib)"></textarea>
-    <textarea name="detail" placeholder="Detail Literatur (tidak wajib)"></textarea>
-    <button type="submit">Tambah Literatur</button>
-</form>
-
-<h3>Daftar Literatur</h3>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Judul</th>
-            <th>Penulis</th>
-            <th>Penerbit</th>
-            <th>Tahun</th>
-            <th>Link</th>
-            <th>Deskripsi</th>
-            <th>Detail</th>
-            <th>Kategori</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($literatures as $literature)
-        <tr>
-            <td>
-                <input type="text" name="title" value="{{ $literature->title }}" readonly>
-            </td>
-            <td>
-                <input type="text" name="author" value="{{ $literature->author }}" readonly>
-            </td>
-            <td>
-                <input type="text" name="publisher" value="{{ $literature->publisher ?? '-' }}" readonly>
-            </td>
-            <td>
-                <input type="number" name="year" value="{{ $literature->year }}" readonly>
-            </td>
-            <td>
-                <a href="{{ $literature->file_url }}" target="_blank">Lihat File</a>
-            </td>
-            <td>
-                <textarea name="description" readonly>{{ $literature->description ?? '-' }}</textarea>
-            </td>
-            <td>
-                <textarea name="detail" readonly>{{ $literature->detail ?? '-' }}</textarea>
-            </td>
-            <td>
-                <select name="category_id" disabled>
-                    @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ $category->id == $literature->category_id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
+    <!-- Category Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Tambah Kategori Literatur</h3>
+        <form action="{{ route('library.storeCategory') }}" method="POST" class="space-y-4">
+            @csrf
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" name="name" placeholder="Nama Kategori Literatur" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select name="type_id" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="">Pilih Jenis Literatur</option>
+                    @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </select>
-            </td>
-            <td>
-                <!-- Form Update -->
-                <form action="{{ route('library.updateLiterature', $literature->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('PUT')
-                    <input type="text" name="title" value="{{ $literature->title }}" required>
-                    <input type="text" name="author" value="{{ $literature->author }}" required>
-                    <input type="text" name="publisher" value="{{ $literature->publisher ?? '-' }}">
-                    <input type="number" name="year" value="{{ $literature->year }}" required>
-                    <input type="url" name="file_url" value="{{ $literature->file_url }}" required>
-                    <select name="category_id" required>
+                <button type="submit"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150">Tambah
+                    Kategori Literatur</button>
+            </div>
+        </form>
+
+        <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4">Daftar Kategori Literatur</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis
+                            Literatur</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($categories as $category)
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $category->name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $category->type->name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                            <form action="{{ route('library.updateCategory', $category->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex gap-2">
+                                    <input type="text" name="name" value="{{ $category->name }}" required
+                                        class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select name="type_id" required
+                                        class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        @foreach ($types as $type)
+                                        <option value="{{ $type->id }}"
+                                            {{ $type->id == $category->type_id ? 'selected' : '' }}>
+                                            {{ $type->name }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit"
+                                        class="px-3 py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition duration-150">Update</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('library.destroyCategory', $category->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-150">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Literature Section -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Tambah Literatur</h3>
+        <form action="{{ route('library.storeLiterature') }}" method="POST" class="space-y-4">
+            @csrf
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="title" placeholder="Judul Literatur" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <input type="text" name="author" placeholder="Penulis Literatur" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <input type="text" name="publisher" placeholder="Penerbit Literatur (tidak wajib)"
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <input type="number" name="year" placeholder="Tahun Terbit Literatur" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <input type="url" name="file_url" placeholder="Link Literatur" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select name="category_id" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="">Pilih Kategori Literatur</option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <textarea name="description" placeholder="Deskripsi Literatur (tidak wajib)"
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-32"></textarea>
+                <textarea name="detail" placeholder="Detail Literatur (tidak wajib)"
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-32"></textarea>
+            </div>
+            <button type="submit"
+                class="w-full md:w-auto px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150">Tambah
+                Literatur</button>
+        </form>
+
+        <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4">Daftar Literatur</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penulis</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penerbit</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($literatures as $literature)
+                    <tr>
+                        <td class="px-6 py-4">{{ $literature->title }}</td>
+                        <td class="px-6 py-4">{{ $literature->author }}</td>
+                        <td class="px-6 py-4">{{ $literature->publisher ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $literature->year }}</td>
+                        <td class="px-6 py-4">
+                            <a href="{{ $literature->file_url }}" target="_blank"
+                                class="text-indigo-600 hover:text-indigo-900">Lihat File</a>
+                        </td>
+                        <td class="px-6 py-4">{{ $literature->category->name }}</td>
+                        <td class="px-6 py-4 space-x-2">
+                            <button onclick="showEditModal({{ $literature->id }})"
+                                class="px-3 py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition duration-150">Edit</button>
+                            <form action="{{ route('library.destroyLiterature', $literature->id) }}" method="POST"
+                                class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-150">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Edit Literatur</h3>
+            <form id="editForm" method="POST" class="space-y-4">
+                @csrf
+                @method('PUT')
+                <div class="space-y-2">
+                    <input type="text" name="title" placeholder="Judul Literatur" required
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <input type="text" name="author" placeholder="Penulis Literatur" required
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <input type="text" name="publisher" placeholder="Penerbit Literatur"
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <input type="number" name="year" placeholder="Tahun Terbit Literatur" required
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <input type="url" name="file_url" placeholder="Link Literatur" required
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select name="category_id" required
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $category->id == $literature->category_id ? 'selected' : '' }}>
-                            {{ $category->name }}
-                        </option>
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    <textarea name="description">{{ $literature->description ?? '-' }}</textarea>
-                    <textarea name="detail">{{ $literature->detail ?? '-' }}</textarea>
-                    <button type="submit">Update</button>
-                </form>
-                <!-- Form Delete -->
-                <form action="{{ route('library.destroyLiterature', $literature->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Hapus</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+                    <textarea name="description" placeholder="Deskripsi Literatur"
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-24"></textarea>
+                    <textarea name="detail" placeholder="Detail Literatur"
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-24"></textarea>
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="hideEditModal()"
+                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-150">Batal</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function showEditModal(id) {
+    const modal = document.getElementById('editModal');
+    const form = document.getElementById('editForm');
+    form.action = `/library/literature/${id}`;
+    modal.classList.remove('hidden');
+}
+
+function hideEditModal() {
+    const modal = document.getElementById('editModal');
+    modal.classList.add('hidden');
+}
+</script>
 @endsection

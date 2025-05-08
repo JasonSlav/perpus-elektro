@@ -3,19 +3,20 @@
 @section('title', 'Daftar Literatur')
 
 @section('content')
-<h2>Daftar Literatur</h2>
+<link href="{{ mix('css/app.css') }}" rel="stylesheet">
+<h2 class="text-3xl font-bold text-blue-600">Daftar Literatur</h2>
 
-<table border="1">
+<table class="min-w-full bg-white border border-gray-300 rounded-lg">
     <thead>
-        <tr>
-            <th>Tipe</th>
-            <th>Kategori</th>
-            <th>Judul</th>
-            <th>Penulis</th>
-            <th>Penerbit</th>
-            <th>Tahun</th>
-            <th>Detail</th>
-            <th>File</th>
+        <tr class="bg-gray-100">
+            <th class="px-4 py-2 text-left">Tipe</th>
+            <th class="px-4 py-2 text-left">Kategori</th>
+            <th class="px-4 py-2 text-left">Judul</th>
+            <th class="px-4 py-2 text-left">Penulis</th>
+            <th class="px-4 py-2 text-left">Penerbit</th>
+            <th class="px-4 py-2 text-left">Tahun</th>
+            <th class="px-4 py-2 text-left">Detail</th>
+            <th class="px-4 py-2 text-left">File</th>
         </tr>
     </thead>
     <tbody>
@@ -31,9 +32,9 @@
             <td>{{ $literature->detail ?? '-' }}</td> {{-- Dari kolom detail (JSON) --}}
             <td>
                 @if ($literature->file_url)
-                    <a href="{{ asset($literature->file_url) }}" target="_blank">Lihat</a>
+                <a href="{{ asset($literature->file_url) }}" target="_blank">Lihat</a>
                 @else
-                    -
+                -
                 @endif
             </td>
         </tr>
