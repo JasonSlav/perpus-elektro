@@ -4,7 +4,17 @@
 
 @section('content')
 <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-<h2 class="text-3xl font-bold text-blue-600">Daftar Literatur</h2>
+
+<div class="flex items-center mb-6">
+    <!-- UM Logo -->
+    <img src="{{ asset('logo um.jpg') }}" alt="Universitas Negeri Malang" class="h-16 mr-4">
+
+    <!-- Title -->
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">Perpustakaan Elektro</h1>
+        <h2 class="text-3xl font-bold text-blue-600">Daftar Literatur</h2>
+    </div>
+</div>
 
 <table class="min-w-full bg-white border border-gray-300 rounded-lg">
     <thead>
@@ -32,7 +42,7 @@
             <td>{{ $literature->detail ?? '-' }}</td> {{-- Dari kolom detail (JSON) --}}
             <td>
                 @if ($literature->file_url)
-                <a href="{{ asset($literature->file_url) }}" target="_blank">Lihat</a>
+                <a href="{{ asset($literature->file_url) }}" target="_blank" class="text-blue-600 hover:underline">Lihat</a>
                 @else
                 -
                 @endif
