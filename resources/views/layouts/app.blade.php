@@ -23,11 +23,11 @@
             <nav class="flex space-x-8 text-base font-medium">
                 <a href="{{ route('literatures.index') }}" class="hover:text-yellow-300">Home</a>
                 <a href="{{ route('library.index') }}" class="text-white hover:text-gray-200">Kelola Literatur</a>
-                <a href="#" class="text-yellow-300 border-b-2 border-yellow-300 pb-1">Data buku</a>
+                <!-- <a href="#" class="border-yellow-300">Data buku</a>
                 <a href="#" class="hover:text-yellow-300">Penelitian <span class="ml-1">&#x25BC;</span></a>
                 <a href="#" class="hover:text-yellow-300">Jurnal <span class="ml-1">&#x25BC;</span></a>
                 <a href="#" class="hover:text-yellow-300">Data petugas</a>
-                <a href="#" class="hover:text-yellow-300">Akun</a>
+                <a href="#" class="hover:text-yellow-300">Akun</a> -->
             </nav>
         </div>
     </header>
@@ -35,7 +35,7 @@
     <!-- Search Bar & Filter -->
     <div class="container mx-auto flex items-center mt-8 mb-4">
         <button class="bg-yellow-400 text-white font-semibold px-8 py-2 rounded-l-full text-lg shadow">SEARCH</button>
-        <input type="text" class="flex-1 px-4 py-2 border-t border-b border-gray-300 focus:outline-none text-lg" placeholder="" style="border-left: none; border-right: none;" />
+        <input type="text" class="flex-1 px-4 py-2 border-t border-b border-gray-300 focus:outline-none text-lg" placeholder="..." style="border-left: none; border-right: none;" />
         <div class="bg-gray-200 px-6 py-2 rounded-r-full flex items-center cursor-pointer ml-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V6zm0 6a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" /></svg>
             <span class="text-lg font-medium">Filter</span>
@@ -49,7 +49,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white text-center py-4 mt-8">
-        <p>&copy; {{ date('Y') }} Perpustakaan Jurusan</p>
+        <p>&copy; {{ date('Y') }} ELEKTROOO</p>
     </footer>
 </body>
 

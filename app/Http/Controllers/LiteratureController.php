@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Literature;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LiteratureController extends Controller
