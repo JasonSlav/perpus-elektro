@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('literatures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('cover');
             $table->string('title');
             $table->string('author');
             $table->string('publisher')->nullable();
-            $table->string('description')->nullable();
-            $table->json('detail')->nullable();
-            $table->integer('year')->nullable();
+            $table->string('year')->nullable();
             $table->string('file_url')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
