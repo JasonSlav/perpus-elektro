@@ -25,8 +25,10 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -84,10 +86,12 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis
                             Literatur</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -96,7 +100,8 @@
                         <td class="px-6 py-4 whitespace-nowrap">{{ $category->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ $category->type->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap space-x-2">
-                            <form action="{{ route('library.updateCategory', $category->id) }}" method="POST" class="inline">
+                            <form action="{{ route('library.updateCategory', $category->id) }}" method="POST"
+                                class="inline">
                                 @csrf
                                 @method('PUT')
                                 <div class="flex gap-2">
@@ -115,7 +120,8 @@
                                         class="px-3 py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition duration-150">Update</button>
                                 </div>
                             </form>
-                            <form action="{{ route('library.destroyCategory', $category->id) }}" method="POST" class="inline">
+                            <form action="{{ route('library.destroyCategory', $category->id) }}" method="POST"
+                                class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
@@ -135,6 +141,8 @@
         <form action="{{ route('library.storeLiterature') }}" method="POST" class="space-y-4">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="title" placeholder="Cover" required
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 <input type="text" name="title" placeholder="Judul Literatur" required
                     class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 <input type="text" name="author" placeholder="Penulis Literatur" required
@@ -153,12 +161,6 @@
                     @endforeach
                 </select>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <textarea name="description" placeholder="Deskripsi Literatur (tidak wajib)"
-                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-32"></textarea>
-                <textarea name="detail" placeholder="Detail Literatur (tidak wajib)"
-                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-32"></textarea>
-            </div>
             <button type="submit"
                 class="w-full md:w-auto px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150">Tambah
                 Literatur</button>
@@ -169,18 +171,26 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penulis</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penerbit</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cover
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Penulis</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Penerbit</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Kategori</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($literatures as $literature)
                     <tr>
+                        <td class="px-6 py-4">{{ $literature->cover }}</td>
                         <td class="px-6 py-4">{{ $literature->title }}</td>
                         <td class="px-6 py-4">{{ $literature->author }}</td>
                         <td class="px-6 py-4">{{ $literature->publisher ?? '-' }}</td>
@@ -234,10 +244,6 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    <textarea name="description" placeholder="Deskripsi Literatur"
-                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-24"></textarea>
-                    <textarea name="detail" placeholder="Detail Literatur"
-                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-24"></textarea>
                 </div>
                 <div class="flex justify-end space-x-2">
                     <button type="button" onclick="hideEditModal()"
@@ -251,16 +257,16 @@
 </div>
 
 <script>
-function showEditModal(id) {
-    const modal = document.getElementById('editModal');
-    const form = document.getElementById('editForm');
-    form.action = `/library/literature/${id}`;
-    modal.classList.remove('hidden');
-}
+    function showEditModal(id) {
+        const modal = document.getElementById('editModal');
+        const form = document.getElementById('editForm');
+        form.action = `/library/literature/${id}`;
+        modal.classList.remove('hidden');
+    }
 
-function hideEditModal() {
-    const modal = document.getElementById('editModal');
-    modal.classList.add('hidden');
-}
+    function hideEditModal() {
+        const modal = document.getElementById('editModal');
+        modal.classList.add('hidden');
+    }
 </script>
 @endsection
