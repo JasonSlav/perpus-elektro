@@ -185,11 +185,11 @@
                         <td class="px-6 py-4">{{ $literature->author }}</td>
                         <td class="px-6 py-4">{{ $literature->publisher ?? '-' }}</td>
                         <td class="px-6 py-4">{{ $literature->year }}</td>
-                        <td class="px-6 py-4">dss
+                        <td class="px-6 py-4">
                             <a href="{{ $literature->file_url }}" target="_blank"
                                 class="text-indigo-600 hover:text-indigo-900">Lihat File</a>
                         </td>
-                        <td class="px-6 py-4">{{ $literature->category->name }}</td>
+                        <td class="px-6 py-4">{{ $literature->name }}</td>
                         <td class="px-6 py-4 space-x-2">
                             <button onclick="showEditModal({{ $literature->id }})"
                                 class="px-3 py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition duration-150">Edit</button>
@@ -218,7 +218,7 @@
                 @csrf
                 @method('PUT')
                 <div class="space-y-2">
-                    <input type="text" name="title" placeholder="Judul Literatur" required
+                    <input type="text" name="title" placeholder="Judul Literatur" value="{{ $literature->title }}" required
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <input type="text" name="author" placeholder="Penulis Literatur" required
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
